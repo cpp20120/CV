@@ -1,35 +1,31 @@
-name: LaTeX to PDF
+name: LateX to PDF
 
 on:
   push:
     branches: 
-      - main
+      - master
+      - develop
     tags:
        - '*'
   pull_request:
-    branches: [ main ]
+    branches: [ master ]
 
 jobs:
   build_latex:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4 
-        
-      - name: Compile LaTeX document
-        uses: xu-cheng/latex-action@v3
+      - name: Set up Git repository
+        uses: actions/checkout@v2
+      - name: latex2pdf
+        id: compile-latex-document
+        uses: thomas-chauvet/latex2pdf-action@1.0.5
         with:
-          root_file: cv.tex
-          latexmk_use_xelatex: true 
-          args: "-shell-escape -interaction=nonstopmode -file-line-error"
-          extra_system_packages: |
-            lua-uni-algos
-            fonts-freefont-ttf
-            fonts-lmodern
-            
-      - name: Upload PDF artifact
-        uses: actions/upload-artifact@v3
+          output_dir: output
+          main_latex_file: cv.tex
+          ctan_packages: amsmath amsfonts lua-uni-algos
+      - name: Upload PDF to the workflow tab
+        id: upload-workflow-tab
+        uses: actions/upload-artifact@v2
         with:
-          name: CV-PDF
-          path: |
-            cv.pdf
+          name: output
+          path: output/cv.pdf
