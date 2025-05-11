@@ -21,7 +21,7 @@ jobs:
         with:
           root_file: cv.tex
       - name: Upload PDF to the workflow tab
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: output
           path: cv.pdf
