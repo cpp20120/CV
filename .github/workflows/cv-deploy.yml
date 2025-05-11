@@ -1,5 +1,15 @@
-name: Build LaTeX document
-on: [push]
+name: LateX to PDF
+
+on:
+  push:
+    branches:
+      - master
+      - develop
+    tags:
+      - '*'
+  pull_request:
+    branches: [ master ]
+
 jobs:
   build_latex:
     runs-on: ubuntu-latest
@@ -10,8 +20,8 @@ jobs:
         uses: xu-cheng/latex-action@v3
         with:
           root_file: cv.tex
-      - name: Upload PDF file
-        uses: actions/upload-artifact@v4
+      - name: Upload PDF to the workflow tab
+        uses: actions/upload-artifact@v2
         with:
           name: output
-          path: output/cv.pdf
+          path: cv.pdf
