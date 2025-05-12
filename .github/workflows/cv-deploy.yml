@@ -2,40 +2,36 @@ name: LaTeX to PDF and Deploy
 
 on:
   push:
-    branches:
-      - master
-      - main
-    tags:
-      - '*'
-  pull_request:
-    branches: [ master ]
+    branches: [main, master]
 
 jobs:
-  build_latex:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Set up Git repository
-        uses: actions/checkout@v4
-        
-      - name: Compile LaTeX document
+      - uses: actions/checkout@v4
+
+      - name: Compile LaTeX
         uses: xu-cheng/latex-action@v3
         with:
           root_file: cv.tex
-          
-      - name: Upload PDF to the workflow tab
-        uses: actions/upload-artifact@v4
-        with:
-          name: output
-          path: cv.pdf
-          
-      - name: Deploy to GitHub Pages
-        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+
+      - name: Create Page
+        run: |
+          echo "<!DOCTYPE html>
+          <html>
+          <head>
+            <title>CV</title>
+            <meta http-equiv='refresh' content='0; url=cv.pdf'>
+          </head>
+          <body>
+            <p>Redirecting to <a href='cv.pdf'>CV.pdf</a>...</p>
+          </body>
+          </html>" > index.html
+
+      - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./
           publish_branch: gh-pages
-          keep_files: true
+          publish_dir: ./
           force_orphan: true
-          destination_dir: ./
-          allow_empty_commit: true
