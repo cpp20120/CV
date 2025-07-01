@@ -1,0 +1,33 @@
+name: LaTeX to PDF and Commit
+
+on:
+  push:
+    branches: [main, master]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true 
+
+      - name: Compile LaTeX
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: cv.tex
+
+      - name: Commit compiled PDF
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          
+          if [ -f cv.pdf ]; then
+            git add cv.pdf
+            git commit -m "Update compiled PDF" || echo "No changes to commit"
+            git push
+          else
+            echo "PDF not found!"
+            exit 1
+          fi
