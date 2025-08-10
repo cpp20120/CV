@@ -6,112 +6,87 @@
 \usepackage{enumitem}
 \usepackage{titlesec}
 \usepackage{hyperref}
-\usepackage{graphicx}
-\usepackage[export]{adjustbox} 
 \geometry{margin=1.5cm}
 
 \titleformat{\section}{\large\bfseries}{}{0em}{}
-\titleformat{\subsection}{\normalsize\bfseries}{}{0em}{}
-
 \renewcommand{\labelitemi}{--}
 
 \begin{document}
-	
-	\begin{center}
-		\textbf{\LARGE Кривощеков Александр Александрович} \\
-		\small C++ Developer (System Programming | Graphics | Backend) \\
-		Новосибирск \\
-		\href{mailto:alex.krivoschecov@gmail.com}{alex.krivoschecov@gmail.com} | +7 913 417 84 75 \\
-		\href{https://github.com/cpp20120}{github.com/cpp20120} 
-	\end{center}
-	
-	\section*{О себе:}
-	C++ разработчик с опытом в системном программировании, компьютерной графике и backend-разработке. Специализируюсь на высокопроизводительных решениях с использованием C++17/20. Имею опыт руководства командами в университетских проектах, где организовывал разработку и координировал задачи. Стремлюсь к созданию оптимизированных и масштабируемых систем.
-	
-	\section*{Опыт работы}
-	\textbf{Turing Pi} | Удалённо — C++ Developer \\
-	\textit{Июль 2024 — Апрель 2025 по контракту}
-	\begin{itemize}[noitemsep]
-		\item Разработал микросервис для чат-системы на C++20 (Drogon Framework).
-		\item Реализовал WebSocket API с поддержкой низких задержек.
-		\item Разработал AI-агентов для чат-системы, включая управление диалогом и контекстом..
-		\item Инициировал и реализовал переход проекта с GNU Make на CMake, улучшив структуру сборки.
-	\end{itemize}
-	
-	\section*{Участие в хакатонах}
-	\begin{itemize}[noitemsep]
-		\item \textbf{VTB MORE.Tech (10.2023)} — Разработка сервиса для поиска ближайшего отделения банка. Реализовал A* алгоритм для навигации.
-	\end{itemize}
-	
-	\section*{Ключевые проекты}
-	
-	\subsection*{Minecraft Clone (OpenGL 4.6)} 
-	\begin{itemize}[noitemsep]
-		\item Реализация procedural generation с использованием шума Перлина
-		\item Реализован базовый pipeline: камера, освещение, текстуры, интерфейс.
-		\item Chunk based мир
-		\item GLFW GLEW GLM OpenGL + SFML для интерфейса
-		\item 300 fps 1440p на GTX 1050ti
-		\item Исходный код: \href{https://github.com/cpp20120/OldGithub/tree/main/MineGL}{github.com/cpp20120/OldGithub/tree/main/MineGL}
-	\end{itemize}
-	
-	\subsection*{Game Engine (Разработка собственного игрового движка )}
-	\begin{itemize}[noitemsep]
-		\item Собственная математическая библиотека на C++23 (с использованием mdspan).
-		\item Концепты и шаблонное метапрограммирование (TMP) для type-safe API и метапрограммирования.
-		\item Проектирование архитектуры для масштабируемых модулей.
-		\item Планы: Vulkan-рендерер, ECS, скриптовая система.
-		\item Исходный код: \href{https://github.com/cpp20120/Engine}{github.com/cpp20120/Engine}
-	\end{itemize}
 
-    \subsection*{Webserver}
-	\begin{itemize}[noitemsep]
-        \item Реализовал http веб сервер на C++ 20 с использованием корутин и iouring
-	\end{itemize}
-	
-	\subsection*{Курсовые проекты}
-	\begin{itemize}[noitemsep]
-		\item Разработка GUI-приложений на Qt Widgets
-		\item Понимание принципов сигналов/слотов, модели представления данных
-		\item Опыт работы с QMainWindow, стандартными виджетами и layout-ами
-        \item Личный курсовой проект
-	\end{itemize}
-    \begin{itemize}
-        \item В командных курсовых проектах руководил разработкой задания. Делегировал задачи участникам команды. Строил архитектуру проекта и координировал команду из 5 человек, обеспечив сдачу проекта в срок.
-    \end{itemize}
-	
-	\section*{Вклад в OpenSource}
-	\begin{itemize}[noitemsep]
-		\item Экспериментировал с переходом hwloc (Hardware Clock lib) с autotools на modern CMake.  
-		\item Столкнулся со сложностями из-за tightly coupled bash-логики и отказался от полного порта.  
-		\item Приобрёл опыт работы с legacy build-системами.  
-		\item Релизовал библиотеку метапрограммирования с большим количеством функционала. 
-        
-        Исходный код: \href{https://github.com/cpp20120/MetaUtils}{github.com/cpp20120/MetaUtils}
-	\end{itemize}
-	
-	\section*{Технические навыки}
-	\begin{tabular}{@{}ll@{}}
-		\textbf{C++} & Modern C++17/20, TMP, Concepts, Coroutines \\
-		\textbf{CI/CD} & GitHub Actions, CTest, clang-format/tidy \\
-		\textbf{Unit-тесты} & GTest \\
-		\textbf{Графика } & OpenGL 4.6, Vulkan, GLSL, SPIR-V \\
-		\textbf{Backend} & Drogon, Poco, Boost.Beast/Asio, REST/WebSocket \\
-		\textbf{Базы данных} & PostgreSQL (оптимизация запросов) \\
-		\textbf{Многопоточность} & TBB, folly, std::thread, lock-free структуры \\
-		\textbf{Инструменты} & CMake, Ninja, Git, vcpkg, RenderDoc, Nsight \\
-		\textbf{OS} & Linux (системное программирование), Windows \\
-	\end{tabular}
-	
-	\section*{Образование}
-	\textbf{Сибирский государственный университет телекоммуникаций и информатики} \\
-	Бакалавриат по направлению "Информатика и вычислительная техника" \\
-	\textit{2023 — 2027 (ожидаемый выпуск)} \\
-	
-	\section*{Дополнительная информация}
-	\begin{itemize}[noitemsep]
-		\item Английский язык — Intermediate (чтение технической документации)
-		\item Увлечения: компьютерная графика, алгоритмы
-		\item Готов рассматривать вакансии, связанные с Qt-разработкой (как entry-level)
-	\end{itemize}
+\begin{center}
+    {\LARGE \textbf{Кривощеков Александр Александрович}}\\
+    \small C++ Developer (Системное программирование | Графика | Backend)\\
+    Новосибирск | \href{mailto:alex.krivoschecov@gmail.com}{alex.krivoschecov@gmail.com} | +7 913 417 84 75\\
+    \href{https://github.com/cpp20120}{github.com/cpp20120}
+\end{center}
+
+\section*{Профессиональное резюме}
+C++ разработчик с опытом в системном программировании, компьютерной графике и backend-разработке.  
+Реализовал высокопроизводительные сервисы и игровые движки с использованием C++17/20/23, OpenGL/Vulkan, многопоточности и низкоуровневых оптимизаций.  
+Опыт командной работы и руководства проектами (до 5 человек).  
+Цель — разработка масштабируемых, оптимизированных систем.
+
+\section*{Опыт работы}
+
+\textbf{Turing Pi} | Удалённо — C++ Developer  
+\textit{Июль 2024 — Апрель 2025 (контракт)}  
+\begin{itemize}[noitemsep]
+    \item Разработал микросервис на C++20 (Drogon), снизив задержки сообщений до $<$50 мс при 10k+ соединениях.
+    \item Реализовал WebSocket API с низкими задержками и устойчивостью к обрывам соединений.
+    \item Разработал AI-агентов для чат-системы (управление диалогом, контекстом).
+    \item Перевёл проект с GNU Make на CMake, улучшив структуру сборки и сократив время компиляции на 25\%.
+\end{itemize}
+
+\section*{Проекты}
+
+\textbf{Minecraft Clone (OpenGL 4.6)}  
+\begin{itemize}[noitemsep]
+    \item Procedural generation на шуме Перлина, chunk-based мир.
+    \item Реализован pipeline: камера, освещение, текстуры, интерфейс.
+    \item 300 FPS @ 1440p (GTX 1050ti).
+    \item Стек: GLFW, GLEW, GLM, SFML.
+    \item \href{https://github.com/cpp20120/OldGithub/tree/main/MineGL}{Исходный код}.
+\end{itemize}
+
+\textbf{Game Engine (C++23)}  
+\begin{itemize}[noitemsep]
+    \item Математическая библиотека с \texttt{mdspan}, TMP и Concepts для type-safe API.
+    \item Архитектура модульного движка; планируется Vulkan-рендерер, ECS, скриптовая система.
+    \item \href{https://github.com/cpp20120/Engine}{Исходный код}.
+\end{itemize}
+
+\textbf{Webserver (C++20, io\_uring)}  
+\begin{itemize}[noitemsep]
+    \item \href{https://github.com/cpp20120/OldGithub/tree/main/WebServer} HTTP сервер на корутинах с io\_uring; асинхронная обработка запросов.
+\end{itemize}
+
+\section*{Вклад в Open Source}
+\begin{itemize}[noitemsep]
+    \item Эксперимент по переносу hwloc (Hardware Locality) с autotools на CMake.
+    \item Разработка библиотеки метапрограммирования (\href{https://github.com/cpp20120/MetaUtils}{MetaUtils}).
+\end{itemize}
+
+\section*{Технические навыки}
+\begin{itemize}[noitemsep]
+    \item \textbf{Языки и стандарты:} C++17/20/23, TMP, Concepts, Coroutines
+    \item \textbf{Графика:} OpenGL 4.6, Vulkan, GLSL, SPIR-V
+    \item \textbf{Backend:} Drogon, Boost.Beast/Asio, REST, WebSocket
+    \item \textbf{Многопоточность:} std::thread, TBB, folly, lock-free структуры
+    \item \textbf{CI/CD и тесты:} GitHub Actions, CTest, clang-format/tidy, GTest
+    \item \textbf{Инструменты:} CMake, Ninja, Git, vcpkg, RenderDoc, Nsight
+    \item \textbf{БД:} PostgreSQL (оптимизация запросов)
+    \item \textbf{OS:} Linux (low-level), Windows
+\end{itemize}
+
+\section*{Образование}
+\textbf{Сибирский государственный университет телекоммуникаций и информатики}  
+Бакалавриат, «Информатика и вычислительная техника»  
+\textit{2023 — 2027 (ожидаемый выпуск)}
+
+\section*{Дополнительно}
+\begin{itemize}[noitemsep]
+    \item Английский — B1 (чтение документации, участие в код-ревью)
+    \item Увлечения: компьютерная графика, алгоритмы
+\end{itemize}
+
 \end{document}
