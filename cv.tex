@@ -16,8 +16,8 @@
 \begin{center}
     {\LARGE \textbf{Кривощеков Александр Александрович}}\\
     \small C++ Developer (Системное программирование | Графика | Backend)\\
-    Новосибирск | \href{mailto:alex.krivoschecov@gmail.com}{alex.krivoschecov@gmail.com} | +7 913 417 84 75\\
-    \href{https://github.com/cpp20120}{github.com/cpp20120}
+    Новосибирск | Email: \href{mailto:alex.krivoschecov@gmail.com}{alex.krivoschecov@gmail.com}  
+Телефон: \href{tel:+79134178475}{+7 913 417 84 75}  
 \end{center}
 
 \section*{Профессиональное резюме}
@@ -40,30 +40,31 @@ C++ разработчик с опытом в системном програм�
 \section*{Проекты}
 
 \textbf{Minecraft Clone (OpenGL 4.6)}  
-\begin{itemize}[noitemsep]
-    \item Procedural generation на шуме Перлина, chunk-based мир.
-    \item Реализован pipeline: камера, освещение, текстуры, интерфейс.
-    \item 300 FPS @ 1440p (GTX 1050ti).
-    \item Стек: GLFW, GLEW, GLM, SFML.
-    \item \href{https://github.com/cpp20120/OldGithub/tree/main/MineGL}{Исходный код}.
-\end{itemize}
+\begin{itemize}[noitemsep]  
+    \item Procedural generation на шуме Перлина, chunk-based мир.  
+    \item Реализован pipeline: камера, освещение, текстуры, интерфейс.  
+    \item 300 FPS @ 1440p (GTX 1050ti).  
+    \item Стек: GLFW, GLEW, GLM, SFML.  
+    \item Код: \url{https://github.com/cpp20120/OldGithub/tree/main/MineGL}  
+    (GitHub: MineGL)  
+\end{itemize}  
 
 \textbf{Game Engine (C++23)}  
 \begin{itemize}[noitemsep]
     \item Математическая библиотека с \texttt{mdspan}, TMP и Concepts для type-safe API.
     \item Архитектура модульного движка; планируется Vulkan-рендерер, ECS, скриптовая система.
-    \item \href{https://github.com/cpp20120/Engine}{Исходный код}.
+    \item \url{https://github.com/cpp20120/Engine}{Github: Engine}.
 \end{itemize}
 
 \textbf{Webserver (C++20, io\_uring)}  
 \begin{itemize}[noitemsep]
-    \item \href{https://github.com/cpp20120/OldGithub/tree/main/WebServer} HTTP сервер на корутинах с io\_uring; асинхронная обработка запросов.
+    \item \url{https://github.com/cpp20120/OldGithub/tree/main/WebServer} HTTP сервер на корутинах с io\_uring; асинхронная обработка запросов.
 \end{itemize}
 
 \section*{Вклад в Open Source}
 \begin{itemize}[noitemsep]
     \item Эксперимент по переносу hwloc (Hardware Locality) с autotools на CMake.
-    \item Разработка библиотеки метапрограммирования (\href{https://github.com/cpp20120/MetaUtils}{MetaUtils}).
+    \item Разработка библиотеки метапрограммирования (\url{https://github.com/cpp20120/MetaUtils}{MetaUtils}).
 \end{itemize}
 
 \section*{Технические навыки}
@@ -71,7 +72,10 @@ C++ разработчик с опытом в системном програм�
     \item \textbf{Языки и стандарты:} C++17/20/23, TMP, Concepts, Coroutines
     \item \textbf{Графика:} OpenGL 4.6, Vulkan, GLSL, SPIR-V
     \item \textbf{Backend:} Drogon, Boost.Beast/Asio, REST, WebSocket
-    \item \textbf{Многопоточность:} std::thread, TBB, folly, lock-free структуры
+    \item \textbf{Метапрограммирование:} CRTP, SFINAE, constexpr вычисления, шаблонные интерпретаторы
+    
+    \item \textbf{Многопоточность:} std::thread, TBB, folly
+    \item \textbf{Low-latency оптимизации:} io\_uring,  zero-copy, lock-free (Michael–Scott queue)
     \item \textbf{CI/CD и тесты:} GitHub Actions, CTest, clang-format/tidy, GTest
     \item \textbf{Инструменты:} CMake, Ninja, Git, vcpkg, RenderDoc, Nsight
     \item \textbf{БД:} PostgreSQL (оптимизация запросов)
