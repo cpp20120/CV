@@ -1,33 +1,56 @@
+
 name: LaTeX to PDF and Commit
 
 on:
   push:
     branches: [main, master]
+    paths:
+      - '**/*.tex'
+      - '.github/workflows/latex.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: latex-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
         with:
-          persist-credentials: true 
+          persist-credentials: true
 
-      - name: Compile LaTeX
+      - name: Compile LaTeX with XeLaTeX
         uses: xu-cheng/latex-action@v3
         with:
           root_file: cv.tex
+          latexmk_use_xelatex: true
+          args: -pdfxe -file-line-error -halt-on-error -interaction=nonstopmode
+
+      - name: Verify PDF
+        run: |
+          test -s cv.pdf || {
+            echo "::error::cv.pdf was not generated"
+            exit 1
+          }
 
       - name: Commit compiled PDF
         run: |
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
-          
-          if [ -f cv.pdf ]; then
-            git add cv.pdf
-            git commit -m "Update compiled PDF" || echo "No changes to commit"
-            git push
-          else
-            echo "PDF not found!"
-            exit 1
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add cv.pdf
+
+          if git diff --cached --quiet; then
+            echo "PDF unchanged; nothing to commit."
+            exit 0
           fi
+
+          git commit -m "docs: update compiled CV [skip ci]"
+          git push
