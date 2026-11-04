@@ -1,116 +1,86 @@
 \documentclass[a4paper,10pt]{article}
-\usepackage[utf8]{inputenc}
-\usepackage[T2A]{fontenc}
-\usepackage[russian]{babel}
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setdefaultlanguage{russian}
+\setotherlanguage{english}
+\setmainfont{Noto Sans}
+\setsansfont{Noto Sans}
+\setmonofont{DejaVu Sans Mono}
+\newfontfamily\cyrillicfont{Noto Sans}
+\newfontfamily\cyrillicfonttt{DejaVu Sans Mono}
 \usepackage{geometry}
 \usepackage{enumitem}
 \usepackage{titlesec}
-\usepackage{hyperref}
-\geometry{margin=1.5cm}
-
-\titleformat{\section}{\large\bfseries}{}{0em}{}
-\renewcommand{\labelitemi}{--}
+\usepackage[hidelinks]{hyperref}
+\usepackage{microtype}
+\geometry{top=1.05cm,bottom=1.05cm,left=1.55cm,right=1.55cm}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\setlist[itemize]{leftmargin=1.35em,topsep=1pt,itemsep=0pt,parsep=0pt,partopsep=0pt}
+\titleformat{\section}{\normalsize\bfseries}{}{0em}{}[\titlerule]
+\titlespacing*{\section}{0pt}{5pt}{2pt}
+\pagestyle{empty}
+\sloppy
 
 \begin{document}
-
 \begin{center}
-    {\LARGE \textbf{Кривощеков Александр Александрович}}\\
-    \small C++ Developer (Системное программирование | Графика | Backend)\\
-    Новосибирск | Email: \href{mailto:alex.krivoschecov@gmail.com}{alex.krivoschecov@gmail.com}  
-Телефон: \href{tel:+79134178475}{+7 913 417 84 75}  
+{\Large\bfseries Кривощёков Александр Александрович}\\[3pt]
+{\bfseries System Software / Developer Tools Engineer (C++ / C\#)}\\[4pt]
+Новосибирск \quad | \quad
+\href{mailto:alex.krivoschecov@gmail.com}{alex.krivoschecov@gmail.com} \quad | \quad
+\href{tel:+79134178475}{+7 913 417 84 75}\\[2pt]
+\href{https://github.com/cpp20120}{github.com/cpp20120}
 \end{center}
 
-\section*{Резюме}
-C++ разработчик с опытом в системном программировании, компьютерной графике и backend-разработке.  
-Реализовал высокопроизводительные сервисы и игровые движки с использованием C++17/20/23, OpenGL/Vulkan, многопоточности и низкоуровневых оптимизаций.  
-Опыт командной работы и руководства проектами (до 5 человек).  
-Цель — разработка масштабируемых, оптимизированных систем.
+\section*{Профиль}
+Разработчик системного ПО и инструментов разработки. Основные направления: многопоточные C++ runtimes, планировщики задач, оркестрация сборки и тестирования, профилирование и диагностика. Разрабатываю \textbf{DagFlow} (C++23 task runtime) и \textbf{CMakeWorkflow} (.NET 10, инструмент оркестрации CMake/Ninja). Работаю с семантикой конкурентного выполнения, жизненным циклом процессов, воспроизводимостью запусков и проверкой корректности через property-based testing, fuzzing и sanitizers.
+
+\section*{Ключевые проекты}
+\textbf{CMakeWorkflow --- оркестрация CMake-проектов (C\#, .NET 10)} \hfill \href{https://github.com/cpp20120/CMakeWorkflow}{GitHub}\\
+\begin{itemize}
+  \item Разработал CLI и механизм исполнения workflow DAG: configure, build, run, CTest; зависимости, таймауты, отмена, завершение дочерних процессов и изоляция параллельных запусков.
+  \item Добавил поддержку CMake Presets и подключения существующего build tree; учёт multi-config/single-config сборок, ограничение конфликтующих операций над одним деревом.
+  \item Реализовал журнал событий и артефактов выполнения, фиксацию параметров хоста и сборки (provenance), историю запусков, сравнение результатов и обнаружение регрессий.
+  \item Разработал workflow-генераторы для benchmark, profile и test/build matrix; интеграцию с \texttt{perf} на Linux и подготовку проверок окружения (doctor/fix).
+  \item Реализовал долгоживущий host с JSON-RPC и интеграцию с VS Code; проверял CLI и сценарии исполнения на Linux и Windows, в том числе NativeAOT.
+\end{itemize}
+
+\textbf{DagFlow --- C++23 task runtime и work-stealing scheduler} \hfill \href{https://github.com/cpp20120/DagFlow}{GitHub}\\
+\begin{itemize}
+  \item Разрабатываю планировщик задач с work stealing (Chase--Lev), шардингом очередей, ограничением нагрузки (back-pressure), приоритетами, affinity и управлением конкурентностью.
+  \item Реализовал API для DAG, scope, task completion и параллельной обработки диапазонов; прорабатываю явное владение ресурсами, завершение задач и shutdown semantics.
+  \item Создал набор property-based/stateful тестов для очередей, storage, graph, pool и scope; применяю Relacy для проверки сценариев конкурентного доступа, ASan/TSan, fuzzing и cross-platform CI.
+  \item Отдельный \texttt{for\_each\_ws}: в локальном замере на $10^6$ элементах --- около 104 млн элементов/с. Результат относится к конкретному сценарию и не характеризует производительность всех типов задач.
+\end{itemize}
 
 \section*{Опыт работы}
-
-\textbf{Turing Pi} | Удалённо — C++ Developer  
-\textit{Июль 2024 — Апрель 2025 (контракт)}  
-\begin{itemize}[noitemsep]
-    \item Разработал микросервис на C++20 (Drogon), снизив задержки сообщений до $<$50 мс при 10k+ соединениях.
-    \item Реализовал WebSocket API с низкими задержками и устойчивостью к обрывам соединений.
-    \item Разработал AI-агентов для чат-системы (управление диалогом, контекстом).
-    \item Перевёл проект с GNU Make на CMake, улучшив структуру сборки и сократив время компиляции на 25\%.
+\textbf{Turing Pi --- C++ Developer (контракт, удалённо)} \hfill \textit{Июль 2024 --- апрель 2025}\\
+\begin{itemize}
+  \item Разрабатывал серверные компоненты на C++20/Drogon: WebSocket API, управление подключениями, обработка сообщений и переподключений.
+  \item Оптимизировал задержки обмена сообщениями: в используемой нагрузочной конфигурации --- менее 50 мс при 10 тыс.+ соединений.
+  \item Перенёс сборку с GNU Make на CMake; по внутренним замерам время компиляции сократилось примерно на 25\%.
+  \item Работал над логикой AI-агентов для чат-системы, управлением диалогами и контекстом.
 \end{itemize}
 
-\section*{Проекты}
+\section*{Другие технические проекты}
+\textbf{WebServer (C++20, io\_uring)} --- HTTP-сервер с асинхронной обработкой запросов на корутинах.
+\href{https://github.com/cpp20120/OldGithub/tree/main/WebServer}{GitHub}.\\
+\textbf{MineGL (C++, OpenGL 4.6)} --- chunk-based мир, процедурная генерация, графический pipeline.
+\href{https://github.com/cpp20120/OldGithub/tree/main/MineGL}{GitHub}.
 
-\textbf{Minecraft Clone (OpenGL 4.6)}  
-\begin{itemize}[noitemsep]  
-    \item Procedural generation на шуме Перлина, chunk-based мир.  
-    \item Реализован pipeline: камера, освещение, текстуры, интерфейс.  
-    \item 300 FPS @ 1440p (GTX 1050ti).  
-    \item Стек: GLFW, GLEW, GLM, SFML.  
-    \item Код: \url{https://github.com/cpp20120/OldGithub/tree/main/MineGL}  
-    (GitHub: MineGL)  
-\end{itemize}  
-
-\textbf{Game Engine (C++23)}  
-\begin{itemize}[noitemsep]
-    \item Математическая библиотека с \texttt{mdspan}, TMP и Concepts для type-safe API.
-    \item Архитектура модульного движка; планируется Vulkan-рендерер, ECS, скриптовая система.
-    \item \url{https://github.com/cpp20120/Engine}{Github: Engine}.
-\end{itemize}
-
-\textbf{Webserver (C++20, io\_uring)}  
-\begin{itemize}[noitemsep]
-    \item \url{https://github.com/cpp20120/OldGithub/tree/main/WebServer} HTTP сервер на корутинах с io\_uring; асинхронная обработка запросов.
-\end{itemize}
-
-\textbf{DagFlow (C++20, lock-free DAG runtime)}  
-\begin{itemize}[noitemsep]
-    \item Мини-рантайм для параллельных задач с DAG-ориентированным планировщиком.
-    \item Собственный work-stealing пул (Chase–Lev) + центральные lock-free MPMC очереди (Michael–Scott) с Hazard Pointers/QSBR.
-    \item Поддержка аффинити, приоритетов, back-pressure, ограничений конкуренции и явного управления переполнением (Block/Drop/Fail).
-    \item Высокоуровневый API в стиле TBB: \texttt{submit}, \texttt{then}, \texttt{when\_all}, \texttt{parallel\_for}.
-    \item Документация с архитектурными диаграммами и полным Doxygen-комментированием.
-    \item Специализированный \texttt{for\_each\_ws} для RA-диапазонов (lazy range split + help-first stealing). 
-    \item В моих условиях на 1e6 элементов дал \textasciitilde{}2{.}8× быстрее \texttt{oneTBB::parallel\_for} (RA-кейс). Общий \texttt{parallel\_for} и микротаски специально не оптимизировались.
-    \texttt{Бенчмарки:}
-    \item \url{https://github.com/cpp20120/DagFlow}
-\end{itemize}
-
-\section*{Вклад в Open Source}
-\begin{itemize}[noitemsep]
-    \item Эксперимент по переносу hwloc (Hardware Locality) с autotools на CMake.
-    \item Разработка библиотеки метапрограммирования (\url{https://github.com/cpp20120/MetaUtils}{MetaUtils}).
-\end{itemize}
-
-\section*{Технические навыки}
-\begin{itemize}[noitemsep]
-    \item \textbf{Языки и стандарты:} C++17/20/23, TMP, Concepts, Coroutines
-    \item \textbf{Графика:} OpenGL 4.6, Vulkan, GLSL, SPIR-V
-    \item \textbf{Backend:} Drogon, Boost.Beast/Asio, REST, WebSocket
-    \item \textbf{Метапрограммирование:} CRTP, SFINAE, constexpr вычисления, шаблонные интерпретаторы
-    
-    \item \textbf{Многопоточность:} std::thread, TBB, folly
-    \item \textbf{Low-latency оптимизации:} io\_uring,  zero-copy, lock-free (Michael–Scott queue)
-    \item \textbf{CI/CD и тесты:} GitHub Actions, CTest, clang-format/tidy, GTest
-    \item \textbf{Инструменты:} CMake, Ninja, Git, vcpkg, RenderDoc, Nsight
-    \item \textbf{БД:} PostgreSQL (оптимизация запросов)
-    \item \textbf{OS:} Linux (low-level), Windows
+\section*{Технический стек}
+\begin{itemize}
+  \item \textbf{Языки:} C++17/20/23, C\#, .NET 10; шаблоны, Concepts, Coroutines, async/await.
+  \item \textbf{Системное программирование:} C++ memory model, атомики, work stealing, MPMC, contention, process lifecycle, Linux/Windows, pthreads, io\_uring.
+  \item \textbf{Build \& tooling:} CMake, Ninja, CTest, MSVC, Clang, GCC, Visual Studio, VS Code, GitHub Actions, JSON-RPC, NativeAOT.
+  \item \textbf{Верификация и производительность:} GTest, property-based testing, Relacy, fuzzing, ASan/TSan, \texttt{perf}, ETW (интеграция/проверка возможностей), profiling, benchmarks.
+  \item \textbf{Дополнительно:} WebSocket, REST, Drogon, PostgreSQL, OpenGL, Vulkan (знакомство).
 \end{itemize}
 
 \section*{Образование}
-\textbf{Сибирский государственный университет телекоммуникаций и информатики}  
-Бакалавриат, «Информатика и вычислительная техника»  
-\textit{2023 — 2027 (ожидаемый выпуск)}
+\textbf{Сибирский государственный университет телекоммуникаций и информатики}\\
+Бакалавриат, «Информатика и вычислительная техника» \hfill \textit{2023--2027 (по исходному CV; уточнить)}
 
-\section*{Дополнительно}
-\begin{itemize}[noitemsep]
-    \item Английский — B1 (чтение документации, участие в код-ревью)
-    \item Увлечения: компьютерная графика, алгоритмы
-\end{itemize}
-
-\section*{Преподавательская деятельность}
-\begin{itemize}[noitemsep]
-    \item Провёл цикл неформальных занятий по Git для одногруппников (охват 20+ человек)
-    \item Темы: от базовых команд до продвинутых практик (интерактивный rebase, submodules)
-    \item Результат: 100\% группы начали использовать Git в учебных проектах
-\end{itemize}
-
+\section*{Языки}
+Русский --- родной; английский --- B1 (техническая документация, code review).
 \end{document}
