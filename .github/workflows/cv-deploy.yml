@@ -6,7 +6,7 @@ on:
     branches: [main, master]
     paths:
       - '**/*.tex'
-      - '.github/workflows/latex.yml'
+      - '.github/workflows/cv-deploy.yml'
   workflow_dispatch:
 
 permissions:
