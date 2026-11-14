@@ -1,86 +1,241 @@
 \documentclass[a4paper,10pt]{article}
+
 \usepackage{fontspec}
 \usepackage{polyglossia}
+
 \setdefaultlanguage{russian}
 \setotherlanguage{english}
+
 \setmainfont{Noto Sans}
 \setsansfont{Noto Sans}
 \setmonofont{DejaVu Sans Mono}
+
 \newfontfamily\cyrillicfont{Noto Sans}
+\newfontfamily\cyrillicfontsf{Noto Sans}
 \newfontfamily\cyrillicfonttt{DejaVu Sans Mono}
+
 \usepackage{geometry}
 \usepackage{enumitem}
 \usepackage{titlesec}
-\usepackage[hidelinks]{hyperref}
 \usepackage{microtype}
-\geometry{top=1.05cm,bottom=1.05cm,left=1.55cm,right=1.55cm}
+\usepackage[hidelinks]{hyperref}
+
+\geometry{
+    top=1.05cm,
+    bottom=1.05cm,
+    left=1.55cm,
+    right=1.55cm
+}
+
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{0pt}
-\setlist[itemize]{leftmargin=1.35em,topsep=1pt,itemsep=0pt,parsep=0pt,partopsep=0pt}
-\titleformat{\section}{\normalsize\bfseries}{}{0em}{}[\titlerule]
+\setlength{\emergencystretch}{2em}
+
+\setlist[itemize]{
+    leftmargin=1.35em,
+    topsep=1pt,
+    itemsep=0pt,
+    parsep=0pt,
+    partopsep=0pt
+}
+
+\titleformat{\section}
+    {\normalsize\bfseries}
+    {}
+    {0em}
+    {}
+    [\titlerule]
+
 \titlespacing*{\section}{0pt}{5pt}{2pt}
+
 \pagestyle{empty}
 \sloppy
 
+\newcommand{\project}[3]{%
+    \noindent\textbf{#1}\hfill\href{#2}{#3}\par
+}
+
+\newcommand{\experience}[2]{%
+    \noindent\textbf{#1}\hfill\textit{#2}\par
+}
+
+\newcommand{\smallproject}[3]{%
+    \noindent\textbf{#1} --- #2
+    \href{#3}{GitHub}.\par\vspace{2pt}
+}
+
 \begin{document}
+
+
 \begin{center}
-{\Large\bfseries Кривощёков Александр Александрович}\\[3pt]
-{\bfseries System Software / Developer Tools Engineer (C++ / C\#)}\\[4pt]
-Новосибирск \quad | \quad
-\href{mailto:alex.krivoschecov@gmail.com}{alex.krivoschecov@gmail.com} \quad | \quad
-\href{tel:+79134178475}{+7 913 417 84 75}\\[2pt]
-\href{https://github.com/cpp20120}{github.com/cpp20120}
+    {\Large\bfseries Кривощёков Александр Александрович}\\[3pt]
+    {\bfseries System Software / Developer Tools Engineer (C++ / C\#)}\\[4pt]
+
+    Новосибирск \quad | \quad
+    \href{mailto:alex.krivoschecov@gmail.com}
+         {alex.krivoschecov@gmail.com}
+    \quad | \quad
+    \href{tel:+79134178475}{+7 913 417 84 75}\\[2pt]
+
+    \href{https://github.com/cpp20120}{github.com/cpp20120}
 \end{center}
 
 \section*{Профиль}
-Разработчик системного ПО и инструментов разработки. Основные направления: многопоточные C++ runtimes, планировщики задач, оркестрация сборки и тестирования, профилирование и диагностика. Разрабатываю \textbf{DagFlow} (C++23 task runtime) и \textbf{CMakeWorkflow} (.NET 10, инструмент оркестрации CMake/Ninja). Работаю с семантикой конкурентного выполнения, жизненным циклом процессов, воспроизводимостью запусков и проверкой корректности через property-based testing, fuzzing и sanitizers.
+
+Разработчик системного ПО и инструментов разработки на C++ и C\#.
+Основные направления: многопоточные runtimes, планировщики задач,
+оркестрация сборки и тестирования, профилирование и диагностика.
+Разрабатываю \textbf{DagFlow} (C++23 task runtime) и
+\textbf{CMakeWorkflow} (.NET 10, система оркестрации CMake/Ninja).
+Уделяю особое внимание семантике конкурентного выполнения,
+жизненному циклу процессов, воспроизводимости результатов
+и проверке корректности через property-based testing,
+fuzzing и sanitizers.
+
 
 \section*{Ключевые проекты}
-\textbf{CMakeWorkflow --- оркестрация CMake-проектов (C\#, .NET 10)} \hfill \href{https://github.com/cpp20120/CMakeWorkflow}{GitHub}\\
+
+\project
+    {CMakeWorkflow --- система оркестрации CMake-проектов (C\#, .NET 10)}
+    {https://github.com/cpp20120/CMakeWorkflow}
+    {GitHub}
+
 \begin{itemize}
-  \item Разработал CLI и механизм исполнения workflow DAG: configure, build, run, CTest; зависимости, таймауты, отмена, завершение дочерних процессов и изоляция параллельных запусков.
-  \item Добавил поддержку CMake Presets и подключения существующего build tree; учёт multi-config/single-config сборок, ограничение конфликтующих операций над одним деревом.
-  \item Реализовал журнал событий и артефактов выполнения, фиксацию параметров хоста и сборки (provenance), историю запусков, сравнение результатов и обнаружение регрессий.
-  \item Разработал workflow-генераторы для benchmark, profile и test/build matrix; интеграцию с \texttt{perf} на Linux и подготовку проверок окружения (doctor/fix).
-  \item Реализовал долгоживущий host с JSON-RPC и интеграцию с VS Code; проверял CLI и сценарии исполнения на Linux и Windows, в том числе NativeAOT.
+    \item Разработал CLI и движок исполнения workflow DAG:
+    configure, build, run, CTest; управление зависимостями,
+    таймаутами, отменой и завершением дочерних процессов.
+
+    \item Реализовал поддержку CMake Presets, подключение существующих
+    build trees, single-config/multi-config генераторов
+    и защиту от конфликтующих операций над одним build tree.
+
+    \item Разработал постоянный журнал операций на SQLite,
+    хранение результатов и артефактов, фиксацию параметров
+    окружения (provenance), сравнение запусков
+    и статистическое обнаружение регрессий.
+
+    \item Реализовал генераторы workflow для benchmark,
+    profile, test/build matrix; интеграцию с Linux
+    \texttt{perf} и диагностику окружения через doctor/fix.
+
+    \item Разработал NativeAOT Host с JSON-RPC API,
+    удалённым исполнением через SSH, восстановлением операций,
+    проверкой целостности артефактов и интеграцией с VS Code.
 \end{itemize}
 
-\textbf{DagFlow --- C++23 task runtime и work-stealing scheduler} \hfill \href{https://github.com/cpp20120/DagFlow}{GitHub}\\
+\project
+    {DagFlow --- C++23 task runtime и work-stealing scheduler}
+    {https://github.com/cpp20120/DagFlow}
+    {GitHub}
+
 \begin{itemize}
-  \item Разрабатываю планировщик задач с work stealing (Chase--Lev), шардингом очередей, ограничением нагрузки (back-pressure), приоритетами, affinity и управлением конкурентностью.
-  \item Реализовал API для DAG, scope, task completion и параллельной обработки диапазонов; прорабатываю явное владение ресурсами, завершение задач и shutdown semantics.
-  \item Создал набор property-based/stateful тестов для очередей, storage, graph, pool и scope; применяю Relacy для проверки сценариев конкурентного доступа, ASan/TSan, fuzzing и cross-platform CI.
-  \item Отдельный \texttt{for\_each\_ws}: в локальном замере на $10^6$ элементах --- около 104 млн элементов/с. Результат относится к конкретному сценарию и не характеризует производительность всех типов задач.
+    \item Разрабатываю многопоточный планировщик задач
+    с work stealing (Chase--Lev), шардированными очередями,
+    back-pressure, приоритетами, affinity
+    и ограничением конкурентности.
+
+    \item Реализовал API для DAG, task scope,
+    completion и параллельной обработки диапазонов;
+    прорабатываю явное владение ресурсами,
+    завершение задач и shutdown semantics.
+
+    \item Разработал property-based и stateful тесты
+    для очередей, storage, graph, pool и scope.
+    Использую Relacy, ASan/TSan, fuzzing
+    и кроссплатформенную CI для проверки корректности.
+
+    \item В локальном benchmark \texttt{for\_each\_ws}
+    обработка $10^6$ элементов достигает
+    около 104 млн элементов/с.
+    Результат относится к конкретному сценарию нагрузки.
 \end{itemize}
 
 \section*{Опыт работы}
-\textbf{Turing Pi --- C++ Developer (контракт, удалённо)} \hfill \textit{Июль 2024 --- апрель 2025}\\
+
+\experience
+    {Turing Pi --- C++ Developer (контракт, удалённо)}
+    {Июль 2024 --- апрель 2025}
+
 \begin{itemize}
-  \item Разрабатывал серверные компоненты на C++20/Drogon: WebSocket API, управление подключениями, обработка сообщений и переподключений.
-  \item Оптимизировал задержки обмена сообщениями: в используемой нагрузочной конфигурации --- менее 50 мс при 10 тыс.+ соединений.
-  \item Перенёс сборку с GNU Make на CMake; по внутренним замерам время компиляции сократилось примерно на 25\%.
-  \item Работал над логикой AI-агентов для чат-системы, управлением диалогами и контекстом.
+    \item Разрабатывал серверные компоненты на C++20/Drogon:
+    WebSocket API, управление подключениями,
+    обработку сообщений и переподключений.
+
+    \item Оптимизировал задержки обмена сообщениями:
+    менее 50 мс при 10 тыс.+ соединений
+    в используемой нагрузочной конфигурации.
+
+    \item Перенёс систему сборки с GNU Make на CMake;
+    по внутренним замерам время компиляции
+    сократилось примерно на 25\%.
+
+    \item Работал над логикой AI-агентов для чат-системы,
+    управлением диалогами и контекстом.
 \end{itemize}
+
 
 \section*{Другие технические проекты}
-\textbf{WebServer (C++20, io\_uring)} --- HTTP-сервер с асинхронной обработкой запросов на корутинах.
-\href{https://github.com/cpp20120/OldGithub/tree/main/WebServer}{GitHub}.\\
-\textbf{MineGL (C++, OpenGL 4.6)} --- chunk-based мир, процедурная генерация, графический pipeline.
-\href{https://github.com/cpp20120/OldGithub/tree/main/MineGL}{GitHub}.
+
+\smallproject
+    {GameShiz (C\#, ASP.NET Core)}
+    {Фреймворк для пошаговых игр с модульной архитектурой,
+    DDD, CQRS, Event Sourcing, проекциями
+    и восстановлением состояния.}
+    {https://github.com/cpp20120/GameShiz}
+
+\smallproject
+    {WebServer (C++20, io\_uring)}
+    {HTTP-сервер с асинхронной обработкой запросов
+    на корутинах.}
+    {https://github.com/cpp20120/OldGithub/tree/main/WebServer}
+
+\smallproject
+    {MineGL (C++, OpenGL 4.6)}
+    {Chunk-based мир, процедурная генерация
+    и графический pipeline.}
+    {https://github.com/cpp20120/OldGithub/tree/main/MineGL}
+
 
 \section*{Технический стек}
+
 \begin{itemize}
-  \item \textbf{Языки:} C++17/20/23, C\#, .NET 10; шаблоны, Concepts, Coroutines, async/await.
-  \item \textbf{Системное программирование:} C++ memory model, атомики, work stealing, MPMC, contention, process lifecycle, Linux/Windows, pthreads, io\_uring.
-  \item \textbf{Build \& tooling:} CMake, Ninja, CTest, MSVC, Clang, GCC, Visual Studio, VS Code, GitHub Actions, JSON-RPC, NativeAOT.
-  \item \textbf{Верификация и производительность:} GTest, property-based testing, Relacy, fuzzing, ASan/TSan, \texttt{perf}, ETW (интеграция/проверка возможностей), profiling, benchmarks.
-  \item \textbf{Дополнительно:} WebSocket, REST, Drogon, PostgreSQL, OpenGL, Vulkan (знакомство).
+    \item \textbf{Языки и платформы:}
+    C++17/20/23, C\#, .NET 10, ASP.NET Core;
+    Templates, Concepts, Coroutines, async/await.
+
+    \item \textbf{Системное программирование:}
+    C++ memory model, атомики, work stealing,
+    MPMC, contention, process lifecycle,
+    Linux/Windows, pthreads, io\_uring.
+
+    \item \textbf{Build \& Developer Tools:}
+    CMake, Ninja, CTest, MSVC, Clang, GCC,
+    Visual Studio, VS Code, GitHub Actions,
+    JSON-RPC, NativeAOT.
+
+    \item \textbf{Тестирование и производительность:}
+    GTest, property-based testing, Relacy,
+    fuzzing, ASan/TSan, profiling,
+    benchmarks, \texttt{perf},
+    ETW (диагностика возможностей).
+
+    \item \textbf{Backend и инфраструктура:}
+    ASP.NET Core, WebSocket, REST,
+    Drogon, PostgreSQL, SQLite, Docker.
 \end{itemize}
 
+
 \section*{Образование}
-\textbf{Сибирский государственный университет телекоммуникаций и информатики}\\
-Бакалавриат, «Информатика и вычислительная техника» \hfill \textit{2023--2027 (по исходному CV; уточнить)}
+
+\textbf{Сибирский государственный университет
+телекоммуникаций и информатики}\par
+
+Бакалавриат, «Информатика и вычислительная техника»
+\hfill \textit{2023--2027}
 
 \section*{Языки}
-Русский --- родной; английский --- B1 (техническая документация, code review).
+
+Русский --- родной;
+английский --- B1 (техническая документация, code review).
+
 \end{document}
